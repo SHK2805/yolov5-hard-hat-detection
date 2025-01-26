@@ -1,1 +1,1 @@
-# yolov5-hard-hat-detection
+# yolov5 Hard Hat Detection
