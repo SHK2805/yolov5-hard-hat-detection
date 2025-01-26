@@ -1,0 +1,10 @@
+numpy
+pathlib
+ensure
+opencv-python
+Flask
+werkzeug
+pyyaml
+python-box
+types-PyYAML
+opencv-python
