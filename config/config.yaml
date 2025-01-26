@@ -1,0 +1,9 @@
+artifacts_root: 'artifacts'
+
+data_ingestion:
+  data_root_dir: 'artifacts/data_ingestion'
+  roboflow_api_key_file: 'roboflow_api_key.yaml'
+  roboflow_workspace: 'sri-vnhii'
+  roboflow_project: 'hard-hat-sample-uurjf'
+  roboflow_version: '1'
+  roboflow_export_format: 'yolov5'

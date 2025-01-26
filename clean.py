@@ -1,5 +1,4 @@
 from pathlib import Path
-
 from src.hard_hat_detection.utils.delete_directories import delete_directories
 
 
@@ -8,7 +7,7 @@ def clean():
         paths = [Path("artifacts"), Path("logs")]
         # delete the folders
         delete_directories(paths)
-        print(f"Cleaned up the project directories: {paths}")
+        print(f"Cleaned up the project directories")
 
     except Exception as e:
         raise e

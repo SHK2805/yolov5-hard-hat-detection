@@ -170,3 +170,5 @@ cython_debug/
 # PyPI configuration file
 .pypirc
 /.idea
+roboflow_api_key.yaml
+/artifacts

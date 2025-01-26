@@ -15,6 +15,21 @@
 pip install -r requirements.txt
 ```
 
+#### Data
+* Before running the project you need to get the following from roboflow
+  * API key
+    * The API key is added to the file roboflow_api_key.yaml as ROBOFLOW_API_KEY
+    * **DO NOT ADD THIS FILE TO THE GIT**. Add this to the .gitignore file
+    ```yaml
+    # roboflow api key
+    roboflow_api_key:
+        ROBOFLOW_API_KEY: "your_roboflow_api_key"
+    ```
+  * workspace name
+  * project name
+  * data version
+  * data format
+
 #### MLFlow
 * Before running the model evaluation pipeline or the model prediction pipeline make sure the **mlflow server is running**
 * Make sure the correct **mlflow uri** is set in the config file **config.yaml**
@@ -92,24 +107,21 @@ python app.py
    2. data_validation
    3. data_transformation
    4. model_training
-2. schema.yaml
-   1. The schema of the data i.e. the column headers and the data types
-   2. data_validation
-3. params.yaml
+2. params.yaml
    1. The hyperparameters for the model
    2. model_training
-4. Update the entity
+3. Update the entity
    1. In src > entity > config_entity.py
-5. Update the configuration manager 
+4. Update the configuration manager 
    1. In src > config > configuration.py
-6. Update the components 
+5. Update the components 
    1. In src > components 
       1. data_ingestion.py
       2. data_validation.py
       3. data_transformation.py
       4. model_trainer.py
       5. model_evaluation.py
-7. Update the pipeline
+6. Update the pipeline
     1. In src > pipeline
         1. data_ingestion.py
         2. data_validation.py
@@ -118,9 +130,9 @@ python app.py
         5. model_evaluation.py
         6. prediction.py
            1. The prediction pipeline is written only in this file the other above steps are not used in the prediction pipeline
-8. Update the main.py
+7. Update the main.py
     1. In main.py
-9. Predictions
+8. Predictions
    1. Create the templates folder with the html files
    2. Create the app.py for the Flask API
       1. The app.py file is the main file where we run the Flask API

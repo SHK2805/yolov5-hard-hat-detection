@@ -76,3 +76,16 @@ def write_data_to_file(file_path: Path, data: str) -> None:
         file.write(data)
 
     logger.info(f"Data has been written to the file: {file_path}")
+
+# function to get environment variables
+def get_env_var(env_var: str) -> str:
+    """
+    Get the environment variable
+
+    :param env_var: Environment variable
+    :return: Value of the environment variable
+    """
+    # check if the environment variable exists
+    if env_var not in os.environ:
+        raise ValueError(f"Environment variable: {env_var} does not exist")
+    return os.environ[env_var]
