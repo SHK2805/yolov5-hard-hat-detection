@@ -89,3 +89,13 @@ def get_env_var(env_var: str) -> str:
     if env_var not in os.environ:
         raise ValueError(f"Environment variable: {env_var} does not exist")
     return os.environ[env_var]
+
+# check if a directory exists and is not empty
+def check_directory_not_empty(directory: Path) -> bool:
+    """
+    Check if the directory exists and is not empty
+
+    :param directory: Path to the directory
+    :return: True if the directory exists and is not empty, False otherwise
+    """
+    return directory.exists() and any(directory.iterdir())

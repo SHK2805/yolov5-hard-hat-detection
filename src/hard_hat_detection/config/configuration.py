@@ -2,7 +2,7 @@ import os
 from pathlib import Path
 
 from src.hard_hat_detection.constants.constants import CONFIG_FILE_PATH, PARAMS_FILE_PATH
-from src.hard_hat_detection.entity.config_entity import DataIngestionConfig
+from src.hard_hat_detection.entity.config_entity import DataIngestionConfig, DataValidationConfig
 from src.hard_hat_detection.logger.logger_config import logger
 from src.hard_hat_detection.utils.common import read_yaml, create_directories
 
@@ -51,3 +51,32 @@ class ConfigurationManager:
         )
         logger.info(f"{tag}Data ingestion configuration created")
         return data_ingestion_config
+
+    def get_data_validation_config(self) -> DataValidationConfig:
+        tag: str = f"{self.class_name}::get_data_validation_config::"
+        config = self.config.data_validation
+        logger.info(f"{tag}Data validation configuration obtained from the config file")
+
+        # create the data directory
+        data_dir = config.data_root_dir
+        logger.info(f"{tag}Data directory: {data_dir} obtained from the config file")
+
+        create_directories([data_dir])
+        logger.info(f"{tag}Data directory created: {data_dir}")
+
+        data_validation_config: DataValidationConfig = DataValidationConfig(
+            data_root_dir=Path(config.data_root_dir),
+            data_dir=Path(config.data_dir),
+            STATUS_FILE=config.STATUS_FILE,
+            TRAIN_DIR=config.TRAIN_DIR,
+            VAL_DIR=config.VAL_DIR,
+            TEST_DIR=config.TEST_DIR,
+            IMG_DIR=config.IMG_DIR,
+            LABEL_DIR=config.LABEL_DIR,
+            LABELS_FILE_EXT=config.LABELS_FILE_EXT,
+            DATA_FILE=config.DATA_FILE
+        )
+        logger.info(f"{tag}Data validation configuration created")
+        return data_validation_config
+
+

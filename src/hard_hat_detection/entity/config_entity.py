@@ -12,3 +12,19 @@ class DataIngestionConfig:
     roboflow_version: str
     roboflow_export_format: str
     roboflow_api_key: str
+
+@dataclass
+class DataValidationConfig:
+    # these are the inputs to the data validation pipeline
+    data_root_dir: Path
+    data_dir: Path
+    STATUS_FILE: str
+    # folders
+    TRAIN_DIR: str
+    VAL_DIR: str
+    TEST_DIR: str
+    IMG_DIR: str
+    LABEL_DIR: str
+    LABELS_FILE_EXT: str
+    # files
+    DATA_FILE: str

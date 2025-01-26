@@ -7,3 +7,20 @@ data_ingestion:
   roboflow_project: 'hard-hat-sample-uurjf'
   roboflow_version: '1'
   roboflow_export_format: 'yolov5'
+
+data_validation:
+  # paths
+  data_root_dir: 'artifacts/data_validation'
+  # inputs
+  data_dir: 'artifacts/data_ingestion'
+  # outputs
+  STATUS_FILE: 'artifacts/data_validation/status.txt'
+  # folders
+  TRAIN_DIR: 'train'
+  VAL_DIR: 'valid'
+  TEST_DIR: 'test'
+  IMG_DIR: 'images'
+  LABEL_DIR: 'labels'
+  LABELS_FILE_EXT: '.txt'
+  # files
+  DATA_FILE: 'data.yaml'
