@@ -17,16 +17,21 @@ class DataIngestion:
     def download_data(self):
         tag: str = f"{self.class_name}::download_data::"
         logger.info(f"{tag}Downloading data from Roboflow")
-        # rf = Roboflow(api_key=self.config.roboflow_api_key)
-        # project = rf.workspace(self.config.roboflow_workspace).project(self.config.roboflow_project)
-        # version = project.version(self.config.roboflow_version)
-        # dataset = version.download(model_format=str(self.config.roboflow_export_format),
-        #                           location=str(self.config.data_root_dir),
-        #                           overwrite=True)
-        logger.info(f"{tag}Data downloaded into the directory: {self.config.data_root_dir} "
-                    f"in the format: {self.config.roboflow_export_format} with overwrite: {True}")
+        download_data = True
+        if download_data:
+            rf = Roboflow(api_key=self.config.roboflow_api_key)
+            project = rf.workspace(self.config.roboflow_workspace).project(self.config.roboflow_project)
+            version = project.version(self.config.roboflow_version)
+            dataset = version.download(model_format=str(self.config.roboflow_export_format),
+                                       location=str(self.config.data_root_dir),
+                                       overwrite=True)
+            logger.info(f"{tag}Data downloaded into the directory: {self.config.data_root_dir} "
+                        f"in the format: {self.config.roboflow_export_format} with overwrite: {True}")
 
-        # return dataset
+            return dataset
+        else:
+            logger.info(f"{tag}Data already downloaded. Skipping the download step")
+            return None
 
 
 

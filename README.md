@@ -30,6 +30,78 @@ pip install -r requirements.txt
   * data version
   * data format
 
+#### Data 
+* The data is downloaded from the roboflow source and saved to the artifacts folder
+* The data is saved to the folder artifacts\data_ingestion
+* The data is transformed and copied to the artifacts\data_transformation folder
+* From the below structure the data is saved to the artifacts folder
+data_ingestion
+│
+├── test
+│   ├── images
+│   │   ├── image1.jpg
+│   │   ├── image2.jpg
+│   │   └── ...
+│   └── labels
+│       ├── image1.txt
+│       ├── image2.txt
+│       └── ...
+│
+├── train
+│   ├── images
+│   │   ├── image1.jpg
+│   │   ├── image2.jpg
+│   │   └── ...
+│   └── labels
+│       ├── image1.txt
+│       ├── image2.txt
+│       └── ...
+│
+├── valid
+│   ├── images
+│   │   ├── image1.jpg
+│   │   ├── image2.jpg
+│   │   └── ...
+│   └── labels
+│       ├── image1.txt
+│       ├── image2.txt
+│       └── ...
+│
+└── data.yaml
+
+* Data is transformed to the below structure
+data_transformation
+│
+├── images
+│   ├── test
+│   │   ├── image1.jpg
+│   │   ├── image2.jpg
+│   │   └── ...
+│   ├── train
+│   │   ├── image1.jpg
+│   │   ├── image2.jpg
+│   │   └── ...
+│   └── valid
+│       ├── image1.jpg
+│       ├── image2.jpg
+│       └── ...
+│
+└── labels
+    ├── test
+    │   ├── image1.txt
+    │   ├── image2.txt
+    │   └── ...
+    ├── train
+    │   ├── image1.txt
+    │   ├── image2.txt
+    │   └── ...
+    └── valid
+        ├── image1.txt
+        ├── image2.txt
+        └── ...
+
+
+
 #### MLFlow
 * Before running the model evaluation pipeline or the model prediction pipeline make sure the **mlflow server is running**
 * Make sure the correct **mlflow uri** is set in the config file **config.yaml**

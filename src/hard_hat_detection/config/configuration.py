@@ -2,7 +2,8 @@ import os
 from pathlib import Path
 
 from src.hard_hat_detection.constants.constants import CONFIG_FILE_PATH, PARAMS_FILE_PATH
-from src.hard_hat_detection.entity.config_entity import DataIngestionConfig, DataValidationConfig
+from src.hard_hat_detection.entity.config_entity import DataIngestionConfig, DataValidationConfig, \
+    DataTransformationConfig
 from src.hard_hat_detection.logger.logger_config import logger
 from src.hard_hat_detection.utils.common import read_yaml, create_directories
 
@@ -78,5 +79,30 @@ class ConfigurationManager:
         )
         logger.info(f"{tag}Data validation configuration created")
         return data_validation_config
+
+    def get_data_transformation_config(self) -> DataTransformationConfig:
+        tag: str = f"{self.class_name}::get_data_transformation_config::"
+        config = self.config.data_transformation
+        logger.info(f"{tag}Data transformation configuration obtained from the config file")
+
+        # create the data directory
+        data_dir = config.data_root_dir
+        logger.info(f"{tag}Data directory: {data_dir} obtained from the config file")
+        create_directories([data_dir])
+        logger.info(f"{tag}Data directory created: {data_dir}")
+
+        data_transformation_config: DataTransformationConfig = DataTransformationConfig(
+            data_root_dir=Path(config.data_root_dir),
+            data_dir=Path(config.data_dir),
+            TRAIN_DIR=config.TRAIN_DIR,
+            VAL_DIR=config.VAL_DIR,
+            TEST_DIR=config.TEST_DIR,
+            IMG_DIR=config.IMG_DIR,
+            LABEL_DIR=config.LABEL_DIR,
+            IMG_FILE_EXT=config.IMG_FILE_EXT,
+            LABELS_FILE_EXT=config.LABELS_FILE_EXT
+        )
+        logger.info(f"{tag}Data transformation configuration created")
+        return data_transformation_config
 
 

@@ -28,3 +28,19 @@ class DataValidationConfig:
     LABELS_FILE_EXT: str
     # files
     DATA_FILE: str
+
+@dataclass
+class DataTransformationConfig:
+    # paths
+    data_root_dir: Path
+    # inputs
+    data_dir: Path
+    # outputs
+    # folders
+    TRAIN_DIR: str
+    VAL_DIR: str
+    TEST_DIR: str
+    IMG_DIR: str
+    LABEL_DIR: str
+    IMG_FILE_EXT: str
+    LABELS_FILE_EXT: str

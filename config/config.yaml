@@ -24,3 +24,18 @@ data_validation:
   LABELS_FILE_EXT: '.txt'
   # files
   DATA_FILE: 'data.yaml'
+
+data_transformation:
+  # paths
+  data_root_dir: 'artifacts/data_transformation'
+  # inputs
+  data_dir: 'artifacts/data_ingestion'
+  # outputs
+  # folders
+  TRAIN_DIR: 'train'
+  VAL_DIR: 'valid'
+  TEST_DIR: 'test'
+  IMG_DIR: 'images'
+  LABEL_DIR: 'labels'
+  IMG_FILE_EXT: '.jpg'
+  LABELS_FILE_EXT: '.txt'
