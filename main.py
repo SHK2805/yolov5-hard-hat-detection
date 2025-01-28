@@ -1,7 +1,8 @@
 from src.hard_hat_detection.logger.logger_config import logger
 from src.hard_hat_detection.pipeline.data_ingestion import DataIngestionTrainingPipeline
-from src.hard_hat_detection.pipeline.data_transformation import DataTransformationTrainingPipeline
 from src.hard_hat_detection.pipeline.data_validation import DataValidationTrainingPipeline
+from src.hard_hat_detection.pipeline.data_transformation import DataTransformationTrainingPipeline
+from src.hard_hat_detection.pipeline.model_trainer import ModelTrainerTrainingPipeline
 
 
 class RunPipeline:
@@ -10,6 +11,7 @@ class RunPipeline:
         self.data_ingestion_pipeline: DataIngestionTrainingPipeline = DataIngestionTrainingPipeline()
         self.data_validation_pipeline: DataValidationTrainingPipeline = DataValidationTrainingPipeline()
         self.data_transformation_pipeline: DataTransformationTrainingPipeline = DataTransformationTrainingPipeline()
+        self.model_trainer_pipeline: ModelTrainerTrainingPipeline = ModelTrainerTrainingPipeline()
 
     def run_data_ingestion_pipeline(self) -> None:
         tag: str = f"{self.class_name}::run_data_ingestion_pipeline::"
@@ -53,10 +55,25 @@ class RunPipeline:
             logger.error(f"{tag}::Error running the data transformation pipeline: {e}")
             raise e
 
+    def run_model_trainer_pipeline(self) -> None:
+        tag: str = f"{self.class_name}::run_model_training_pipeline::"
+        try:
+            logger.info(f"[STARTED]>>>>>>>>>>>>>>>>>>>> {self.model_trainer_pipeline.stage_name} <<<<<<<<<<<<<<<<<<<<")
+            logger.info(f"{tag}::Running the model training pipeline")
+            self.model_trainer_pipeline.model_trainer()
+            logger.info(f"{tag}::Model training pipeline completed")
+            logger.info(
+                f"[COMPLETE]>>>>>>>>>>>>>>>>>>>> {self.model_trainer_pipeline.stage_name} <<<<<<<<<<<<<<<<<<<<\n\n\n")
+        except Exception as e:
+            logger.error(f"{tag}::Error running the model training pipeline: {e}")
+            raise e
+
+
     def run(self) -> None:
         self.run_data_ingestion_pipeline()
         self.run_data_validation_pipeline()
         self.run_data_transformation_pipeline()
+        self.run_model_trainer_pipeline()
 
 if __name__ == "__main__":
     # Run the pipelines

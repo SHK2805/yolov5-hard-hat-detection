@@ -3,7 +3,7 @@ from pathlib import Path
 
 from src.hard_hat_detection.constants.constants import CONFIG_FILE_PATH, PARAMS_FILE_PATH
 from src.hard_hat_detection.entity.config_entity import DataIngestionConfig, DataValidationConfig, \
-    DataTransformationConfig
+    DataTransformationConfig, ModelTrainerConfig
 from src.hard_hat_detection.logger.logger_config import logger
 from src.hard_hat_detection.utils.common import read_yaml, create_directories
 
@@ -104,5 +104,34 @@ class ConfigurationManager:
         )
         logger.info(f"{tag}Data transformation configuration created")
         return data_transformation_config
+
+    def get_model_trainer_config(self) -> ModelTrainerConfig:
+        tag: str = f"{self.class_name}::get_model_trainer_config::"
+        config = self.config.model_trainer
+        logger.info(f"{tag}Model training configuration obtained from the config file")
+
+        # create the data directory
+        data_dir = config.data_root_dir
+        logger.info(f"{tag}Data directory: {data_dir} obtained from the config file")
+        create_directories([data_dir])
+        logger.info(f"{tag}Data directory created: {data_dir}")
+
+        model_trainer_config: ModelTrainerConfig = ModelTrainerConfig(
+            data_root_dir=config.data_root_dir,
+            data_dir=config.data_dir,
+            input_yaml_path=config.input_yaml_path,
+            output_yaml_path=config.output_yaml_path,
+            TRAIN_DIR=config.TRAIN_DIR,
+            VAL_DIR=config.VAL_DIR,
+            TEST_DIR=config.TEST_DIR,
+            model_root_path=config.model_root_path,
+            used_model_name=config.used_model_name,
+            weight_name=config.weight_name,
+            no_epochs=config.no_epochs,
+            batch_size=config.batch_size
+        )
+        logger.info(f"{tag}Model training configuration created")
+        return model_trainer_config
+
 
 

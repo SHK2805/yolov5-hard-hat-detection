@@ -17,7 +17,7 @@ class DataIngestion:
     def download_data(self):
         tag: str = f"{self.class_name}::download_data::"
         logger.info(f"{tag}Downloading data from Roboflow")
-        download_data = True
+        download_data = False
         if download_data:
             rf = Roboflow(api_key=self.config.roboflow_api_key)
             project = rf.workspace(self.config.roboflow_workspace).project(self.config.roboflow_project)

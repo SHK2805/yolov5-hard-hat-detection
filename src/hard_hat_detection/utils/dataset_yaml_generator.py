@@ -1,16 +1,13 @@
 import yaml
 
+from src.hard_hat_detection.logger.logger_config import logger
 
-class YamlGenerator:
-    def __init__(self, input_yaml_path, output_yaml_path):
+
+class DatasetYamlGenerator:
+    def __init__(self, input_yaml_path, output_yaml_path, data):
         self.input_yaml_path = input_yaml_path
         self.output_yaml_path = output_yaml_path
-        self.data = {
-            'path': 'artifacts/data_transformation',
-            'train': 'images/train',
-            'val': 'images/valid',
-            'test': 'images/test'
-        }
+        self.data = data
 
     def read_names_from_yaml(self):
         with open(self.input_yaml_path, 'r') as file:
@@ -28,15 +25,8 @@ class YamlGenerator:
             file.write('\nnames:\n')
             for idx, name in self.data['names'].items():
                 file.write(f"    {idx}: {name}\n")
-        print(f"YAML file has been generated at {self.output_yaml_path}")
+        logger.info(f"YAML file has been generated at {self.output_yaml_path}")
 
     def run(self):
         self.read_names_from_yaml()
         self.generate_yaml()
-
-
-# Usage example
-input_yaml_path = '../artifacts/data_ingestion/data.yaml'
-output_yaml_path = 'new_data.yaml'
-generator = YamlGenerator(input_yaml_path, output_yaml_path)
-generator.run()

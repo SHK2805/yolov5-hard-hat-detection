@@ -44,3 +44,22 @@ class DataTransformationConfig:
     LABEL_DIR: str
     IMG_FILE_EXT: str
     LABELS_FILE_EXT: str
+
+@dataclass
+class ModelTrainerConfig:
+    # paths
+    data_root_dir: str
+    # inputs
+    data_dir: str
+    input_yaml_path: str
+    # outputs
+    output_yaml_path: str
+    # folders
+    TRAIN_DIR: str
+    VAL_DIR: str
+    TEST_DIR: str
+    model_root_path: str
+    used_model_name: str
+    weight_name: str
+    no_epochs: int
+    batch_size: int
