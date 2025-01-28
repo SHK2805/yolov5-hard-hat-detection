@@ -160,6 +160,18 @@ python app.py
 * The model evaluation pipeline evaluates the model using the test data and saves the metrics in the artifacts folder
   *  Metrics data saved to the JSON file: artifacts\model_evaluation\metrics.json
 
+### YOLO pretrained
+* When we initialize a YOLO model, it will by default download the pretrained weights (i.e., yolov5n.pt) to facilitate transfer learning. 
+* This is designed to help users achieve better results, as the model can start training from a point where it has already learned certain features.
+* But if you're seeking to train a model from scratch without loading any pretrained weights, it's definitely possible. 
+* You just need to disable transfer learning while invoking the train function. 
+* You can do this by setting the weights parameter to '' (an empty string) in the train method. 
+* When the weights parameter is set to '', the YOLO model will then initialize random weights instead of using pretrained weights, hence disabling transfer learning. 
+* This applies for classifications tasks as well as other tasks like object detection or segmentation. 
+* Do keep in mind though, training a model from scratch could potentially require a lot more training data and considerably more time to converge compared to transfer learning. 
+* So make sure your dataset is sufficiently large and diverse.
+* We are using the pretrained weights in this project
+
 ### ML Pipeline
 * The ML pipeline is a sequence of steps that are executed in order to build, train, evaluate, and deploy a machine learning model.
 * Below are the steps in the ML pipeline:

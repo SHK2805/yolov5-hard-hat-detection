@@ -30,7 +30,7 @@ class DataIngestion:
 
             return dataset
         else:
-            logger.info(f"{tag}Data already downloaded. Skipping the download step")
+            logger.warning(f"{tag}Data already downloaded. Skipping the download step")
             return None
 
 

@@ -1,65 +1,60 @@
 artifacts_root: 'artifacts'
-data_ingestion_path: 'artifacts/data_ingestion'
-data_validation_path: 'artifacts/data_validation'
-data_transformation_path: 'artifacts/data_transformation'
-model_trainer_path: 'artifacts/model_trainer'
-model_name: 'yolov5'
 
 data_ingestion:
-  data_root_dir: f'{data_ingestion_path}'
-  roboflow_api_key_file: 'roboflow_api_key.yaml'
-  roboflow_workspace: 'sri-vnhii'
-  roboflow_project: 'hard-hat-sample-uurjf'
-  roboflow_version: '1'
-  roboflow_export_format: f'{model_name}'
+    data_root_dir: 'artifacts/data_ingestion'
+    roboflow_api_key_file: 'roboflow_api_key.yaml'
+    roboflow_workspace: 'sri-vnhii'
+    roboflow_project: 'hard-hat-sample-uurjf'
+    roboflow_version: '1'
+    roboflow_export_format: 'yolov5'
 
 data_validation:
-  # paths
-  data_root_dir: f'{data_validation_path}'
-  # inputs
-  data_dir: f'{data_ingestion_path}'
-  # outputs
-  STATUS_FILE: f'{data_validation_path}/status.txt'
-  # folders
-  TRAIN_DIR: 'train'
-  VAL_DIR: 'valid'
-  TEST_DIR: 'test'
-  IMG_DIR: 'images'
-  LABEL_DIR: 'labels'
-  LABELS_FILE_EXT: '.txt'
-  # files
-  DATA_FILE: 'data.yaml'
+    # paths
+    data_root_dir: 'artifacts/data_validation'
+    # inputs
+    data_dir: 'artifacts/data_ingestion'
+    # outputs
+    STATUS_FILE: 'artifacts/data_validation/status.txt'
+    # folders
+    TRAIN_DIR: 'train'
+    VAL_DIR: 'valid'
+    TEST_DIR: 'test'
+    IMG_DIR: 'images'
+    LABEL_DIR: 'labels'
+    LABELS_FILE_EXT: '.txt'
+    # files
+    DATA_FILE: 'data.yaml'
 
 data_transformation:
-  # paths
-  data_root_dir: f'{data_transformation_path}'
-  # inputs
-  data_dir: f'{data_ingestion_path}'
-  # outputs
-  # folders
-  TRAIN_DIR: 'train'
-  VAL_DIR: 'valid'
-  TEST_DIR: 'test'
-  IMG_DIR: 'images'
-  LABEL_DIR: 'labels'
-  IMG_FILE_EXT: '.jpg'
-  LABELS_FILE_EXT: '.txt'
+    # paths
+    data_root_dir: 'artifacts/data_transformation'
+    # inputs
+    data_dir: 'artifacts/data_ingestion'
+    # outputs
+    # folders
+    TRAIN_DIR: 'train'
+    VAL_DIR: 'valid'
+    TEST_DIR: 'test'
+    IMG_DIR: 'images'
+    LABEL_DIR: 'labels'
+    IMG_FILE_EXT: '.jpg'
+    LABELS_FILE_EXT: '.txt'
 
 model_trainer:
-  # paths
-  data_root_dir: f'{model_trainer_path}'
-  # inputs
-  data_dir: f'{data_transformation_path}'
-  input_yaml_path: f'{data_ingestion_path}/data.yaml'
-  # outputs
-  output_yaml_path: f'{model_trainer_path}/dataset.yaml'
-  # folders
-  TRAIN_DIR: 'images/train'
-  VAL_DIR: 'images/valid'
-  TEST_DIR: 'images/test'
-  # model
-  model_root_path: f'{model_name}'
-  used_model_name: f'{model_name}'
-  weight_name: f'{model_name}s.pt'
-  no_epochs: 1
-  batch_size: 16
+    # paths
+    data_root_dir: 'artifacts/model_trainer'
+    # inputs
+    data_dir: 'artifacts/data_transformation'
+    input_yaml_path: 'artifacts/data_ingestion/data.yaml'
+    # outputs
+    output_yaml_path: 'artifacts/model_trainer/dataset.yaml'
+    # folders
+    TRAIN_DIR: 'images/train'
+    VAL_DIR: 'images/valid'
+    TEST_DIR: 'images/test'
+    # model
+    model_root_path: 'yolov5'
+    used_model_name: 'yolov5'
+    weight_name: 'yolov5s.pt'
+    no_epochs: 1
+    batch_size: 16

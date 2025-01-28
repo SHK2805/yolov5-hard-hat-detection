@@ -173,3 +173,4 @@ cython_debug/
 roboflow_api_key.yaml
 /artifacts
 /yolov5
+yolov5s.pt

@@ -1,4 +1,6 @@
 import os
+import shutil
+import sys
 from pathlib import Path
 
 import yaml
@@ -99,3 +101,39 @@ def check_directory_not_empty(directory: Path) -> bool:
     :return: True if the directory exists and is not empty, False otherwise
     """
     return directory.exists() and any(directory.iterdir())
+
+# get project root path
+def get_project_root_path():
+    """
+    Get the project root path
+
+    :return: Project root path
+    """
+    return sys.path[1]
+
+def check_paths(base_directory, paths_to_check):
+    all_present = True
+    for path in paths_to_check:
+        if not os.path.exists(os.path.join(base_directory, path)):
+            logger.warning(f"Path {os.path.join(base_directory, path)} does not exist")
+            all_present = False
+    return all_present
+
+
+def copy_folder(source_path: str, destination_path: str):
+    shutil.copytree(source_path, destination_path, dirs_exist_ok=True)
+
+def copy_file(source_path: str, destination_path: str):
+    shutil.copy2(source_path, destination_path)
+
+def delete_if_exists(path):
+    if os.path.exists(path):
+        # If it's a directory, remove it and all its contents
+        if os.path.isdir(path):
+            shutil.rmtree(path)
+        else:
+            # If it's a file, remove it
+            os.remove(path)
+        logger.info(f"{path} has been deleted.")
+    else:
+        logger.warning(f"{path} does not exist.")
