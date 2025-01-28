@@ -15,6 +15,18 @@
 pip install -r requirements.txt
 ```
 
+#### Install yolov5
+* Install the yolov5 package using the following command
+```bash
+# clone the yolov5 repository
+git clone https://github.com/ultralytics/yolov5.git
+# change the directory to the yolov5 folder
+cd yolov5
+# install the yolov5 package requirements
+pip install -r requirements.txt
+cd ..
+```
+
 #### Data
 * Before running the project you need to get the following from roboflow
   * API key
@@ -101,23 +113,6 @@ data_transformation
         └── ...
 
 
-
-#### MLFlow
-* Before running the model evaluation pipeline or the model prediction pipeline make sure the **mlflow server is running**
-* Make sure the correct **mlflow uri** is set in the config file **config.yaml**
-* Add **mlflow** package to the **requirements.txt** file or install it manually using `pip install mlflow`
-  * The other packages needed are given in the **requirements.txt** file
-* Make sure the mlflow server port does not conflict with any other port on your machine
-* Make sure the mlflow server port does not conflict with Flask server port on your machine
-* * Run the mlflow server using the following command
-* Open the terminal and run the following command
-```bash
-# mlflow server will be running on localhost: 127.0.0.1 and on port: 8080
-mlflow server --host 127.0.0.1 --port 8080
-```
-* Access the mlflow server at http://127.0.0.1:8080/ 
-* Run the MLFlow and Flask in two different terminals
-
 #### Flask
 * Before running the Flask API make sure the **Flask server is running**, to run the flask server flollow the below steps
 * Make sure the correct **Flask server host ip** and  **Flask server port** is set in the app.py file
@@ -152,16 +147,17 @@ python app.py
 * The data validation pipeline validates the data
   * Writes the status to artifacts/data_validation/status.txt
 * The data transformation pipeline performs the data cleaning and feature engineering. 
-  * Performs the train test split and saves the train and test data into csv files
-  * The train and test data is saved to 
+  * Moves tje data to yolo recommended format
+  * The transformed data is saved to 
     * artifacts\data_transformation\
-* The model training pipeline gets the train and test data, trains the model using the train data and saves the model in the artifacts folder
-  * Data read from: artifacts\data_transformation and artifacts\data_transformation
+* The model training pipeline uses train.py from yolov5 repo folder,  gets the data from artifacts, trains the model using the train data and saves the model in the artifacts folder
+  * The model data is read from dataset.yaml file created in the artifacts\model_trainer folder
+  * Data read from: artifacts\data_transformation and model saved to: artifacts\model_trainer
 * The model evaluation pipeline evaluates the model using the test data and saves the metrics in the artifacts folder
   *  Metrics data saved to the JSON file: artifacts\model_evaluation\metrics.json
 
 ### YOLO pretrained
-* When we initialize a YOLO model, it will by default download the pretrained weights (i.e., yolov5n.pt) to facilitate transfer learning. 
+* When we initialize a YOLO model, it will by default download the pretrained weights (i.e., yolov5s.pt) to facilitate transfer learning. 
 * This is designed to help users achieve better results, as the model can start training from a point where it has already learned certain features.
 * But if you're seeking to train a model from scratch without loading any pretrained weights, it's definitely possible. 
 * You just need to disable transfer learning while invoking the train function. 
