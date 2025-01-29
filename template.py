@@ -30,6 +30,8 @@ def create_project_structure(project_name: str) -> bool:
             ".gitignore",
             ".dockerignore",
             "docker-compose.yml",
+            "deploy.py",
+            "cloudformation_template.yaml",
             "requirements.txt",
             "README.md",
             "Dockerfile",
@@ -90,7 +92,7 @@ def create_project_structure(project_name: str) -> bool:
             filedir = filepath.parent
 
             # Ensure Dockerfile, docker-compose.yml and .dockerignore are treated as files
-            if filepath.name in ['Dockerfile', '.dockerignore', 'docker-compose.yml']:
+            if filepath.name in ['Dockerfile', '.dockerignore', 'docker-compose.yml', 'deploy.py', 'cloudformation_template.yaml']:
                 create_file(filepath)
                 continue
 

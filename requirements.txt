@@ -9,9 +9,6 @@ python-box
 types-PyYAML
 opencv-python
 roboflow
-# local package installation
--e .
-yaml
 torch
 pillow
 torchvision
@@ -28,3 +25,4 @@ ultralytics-thop
 tensorflow
 setuptools
 boto3
+-e .

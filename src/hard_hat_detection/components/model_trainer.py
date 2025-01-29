@@ -1,11 +1,12 @@
 import os
-import shutil
 import subprocess
 import sys
+from pathlib import Path
+
 from src.hard_hat_detection.entity.config_entity import ModelTrainerConfig
 from src.hard_hat_detection.exception.exception import CustomException
 from src.hard_hat_detection.logger.logger_config import logger
-from src.hard_hat_detection.utils.common import get_project_root_path, copy_file
+from src.hard_hat_detection.utils.common import copy_file
 from src.hard_hat_detection.utils.dataset_yaml_generator import DatasetYamlGenerator
 
 
@@ -13,6 +14,7 @@ class ModelTrainer:
     def __init__(self, config: ModelTrainerConfig):
         self.class_name = self.__class__.__name__
         self.config = config
+        self.project_root_path = Path(__file__).parent.parent.parent.parent # Path("./")
 
     def generate_dataset_yaml(self):
         tag: str = f"{self.class_name}::generate_dataset_yaml::"
@@ -39,10 +41,12 @@ class ModelTrainer:
         tag: str = f"{self.class_name}::check_yolo_v5::"
         try:
             logger.info(f"{tag}::Checking the yolov5 repository")
-            project_root_path = get_project_root_path()
-            yolo_path = os.path.join(project_root_path, self.config.model_root_path)
+
+            yolo_path = os.path.join(self.project_root_path, self.config.model_root_path)
+            logger.info(f"{tag}::Checking the yolov5 repository at: {yolo_path}")
+
             if os.path.exists(yolo_path):
-                logger.info(f"{tag}::Yolov5 repository already exists at: {yolo_path}")
+                logger.info(f"{tag}::yolov5 repository already exists at: {yolo_path}")
                 return True
             else:
                 logger.error(f"{tag}::The yolov5 repository does not exist at: {yolo_path}")
@@ -82,7 +86,7 @@ class ModelTrainer:
         return train_script_path
 
     def construct_command(self, train_script_path, data_yaml_path):
-        results_path = os.path.join(get_project_root_path(), self.config.data_root_dir)
+        results_path = os.path.join(self.project_root_path, self.config.data_root_dir)
         additional_args = (f"--weights {self.config.weight_name} "
                            f"--data {data_yaml_path} "
                            f"--batch {self.config.batch_size} "
@@ -105,8 +109,8 @@ class ModelTrainer:
 
     def copy_weights(self):
         tag: str = f"{self.class_name}::copy_weights::"
-        weights_source_path = os.path.join(get_project_root_path(), self.config.weight_name)
-        weights_destination_path = os.path.join(get_project_root_path(), self.config.data_root_dir)
+        weights_source_path = os.path.join(self.project_root_path, self.config.weight_name)
+        weights_destination_path = os.path.join(self.project_root_path, self.config.data_root_dir)
         if os.path.exists(weights_source_path):
             copy_file(weights_source_path, weights_destination_path)
             logger.info(f"{tag}::Weights file copied from {weights_source_path} to {weights_destination_path}")

@@ -1,3 +1,6 @@
+import sys
+
+from src.hard_hat_detection.exception.exception import CustomException
 from src.hard_hat_detection.logger.logger_config import logger
 from src.hard_hat_detection.pipeline.data_ingestion import DataIngestionTrainingPipeline
 from src.hard_hat_detection.pipeline.data_validation import DataValidationTrainingPipeline
@@ -24,7 +27,7 @@ class RunPipeline:
                 f"[COMPLETE]>>>>>>>>>>>>>>>>>>>> {self.data_ingestion_pipeline.stage_name} <<<<<<<<<<<<<<<<<<<<\n\n\n")
         except Exception as e:
             logger.error(f"{tag}::Error running the data ingestion pipeline: {e}")
-            raise e
+            raise CustomException(e, sys)
 
     def run_data_validation_pipeline(self) -> None:
         tag: str = f"{self.class_name}::run_data_validation_pipeline::"
@@ -38,7 +41,7 @@ class RunPipeline:
                 f"[COMPLETE]>>>>>>>>>>>>>>>>>>>> {self.data_validation_pipeline.stage_name} <<<<<<<<<<<<<<<<<<<<\n\n\n")
         except Exception as e:
             logger.error(f"{tag}::Error running the data validation pipeline: {e}")
-            raise e
+            raise CustomException(e, sys)
 
     def run_data_transformation_pipeline(self) -> None:
         tag: str = f"{self.class_name}::run_data_transformation_pipeline::"
@@ -53,7 +56,7 @@ class RunPipeline:
                 f"[COMPLETE]>>>>>>>>>>>>>>>>>>>> {self.data_transformation_pipeline.stage_name} <<<<<<<<<<<<<<<<<<<<\n\n\n")
         except Exception as e:
             logger.error(f"{tag}::Error running the data transformation pipeline: {e}")
-            raise e
+            raise CustomException(e, sys)
 
     def run_model_trainer_pipeline(self) -> None:
         tag: str = f"{self.class_name}::run_model_training_pipeline::"
@@ -66,7 +69,7 @@ class RunPipeline:
                 f"[COMPLETE]>>>>>>>>>>>>>>>>>>>> {self.model_trainer_pipeline.stage_name} <<<<<<<<<<<<<<<<<<<<\n\n\n")
         except Exception as e:
             logger.error(f"{tag}::Error running the model training pipeline: {e}")
-            raise e
+            raise CustomException(e, sys)
 
 
     def run(self) -> None:
