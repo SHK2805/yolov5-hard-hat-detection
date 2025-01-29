@@ -1,7 +1,9 @@
+import sys
 from pathlib import Path
 
 from src.hard_hat_detection.components.data_transformation import DataTransformation
 from src.hard_hat_detection.config.configuration import ConfigurationManager
+from src.hard_hat_detection.exception.exception import CustomException
 from src.hard_hat_detection.logger.logger_config import logger
 from src.hard_hat_detection.utils.common import check_file_exists
 
@@ -50,4 +52,4 @@ class DataTransformationTrainingPipeline:
             logger.info(f"{tag}::Data transformation pipeline completed")
         except Exception as e:
             logger.error(f"{tag}::Error running the data transformation pipeline: {e}")
-            raise e
+            raise CustomException(e, sys)

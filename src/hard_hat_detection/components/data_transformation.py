@@ -1,7 +1,9 @@
 import os
 import shutil
+import sys
 
 from src.hard_hat_detection.entity.config_entity import DataTransformationConfig
+from src.hard_hat_detection.exception.exception import CustomException
 from src.hard_hat_detection.logger.logger_config import logger
 
 
@@ -75,4 +77,4 @@ class DataTransformation:
                 raise Exception(f"{tag}Data validation failed!")
         except Exception as e:
             logger.error(f"{tag}Error transforming the data: {e}")
-            raise e
+            raise CustomException(e, sys)

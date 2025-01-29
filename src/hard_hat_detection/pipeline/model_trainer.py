@@ -1,5 +1,8 @@
+import sys
+
 from src.hard_hat_detection.components.model_trainer import ModelTrainer
 from src.hard_hat_detection.config.configuration import ConfigurationManager
+from src.hard_hat_detection.exception.exception import CustomException
 from src.hard_hat_detection.logger.logger_config import logger
 
 STAGE_NAME: str = "Model Training Pipeline"
@@ -25,4 +28,4 @@ class ModelTrainerTrainingPipeline:
             logger.info(f"{tag}::Model training pipeline completed")
         except Exception as e:
             logger.error(f"{tag}::Error running the model training pipeline: {e}")
-            raise e
+            raise CustomException(e, sys)

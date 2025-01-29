@@ -5,8 +5,10 @@ from src.hard_hat_detection.utils.delete_directories import delete_directories
 
 def clean():
     try:
-        paths = [Path("artifacts"), Path("logs"), Path("yolov5")]
         # paths = [Path("logs")]
+        # paths = [Path("artifacts"), Path("logs")]
+        paths = [Path("artifacts"), Path("logs"), Path("yolov5")]
+        # paths = [Path("artifacts/data_transformation"), Path("artifacts/data_validation"), Path("artifacts/model_trainer"), Path("logs")]
         # delete the folders
         delete_directories(paths)
         print(f"Cleaned up the project directories")

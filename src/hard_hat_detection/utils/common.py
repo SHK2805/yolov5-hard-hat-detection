@@ -8,6 +8,7 @@ from box import ConfigBox
 from box.exceptions import BoxValueError
 from ensure import ensure_annotations
 
+from src.hard_hat_detection.exception.exception import CustomException
 from src.hard_hat_detection.logger.logger_config import logger
 
 
@@ -34,7 +35,7 @@ def read_yaml(file_path: Path) -> ConfigBox:
         raise ValueError(f"Error reading the YAML file: {e}")
     except Exception as e:
         logger.error(f"Error reading the YAML file: {e}")
-        raise e
+        raise CustomException(e, sys)
 
 def create_directories(dirs: list, verbose=True) -> None:
     """

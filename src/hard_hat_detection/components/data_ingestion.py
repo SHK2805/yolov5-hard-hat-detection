@@ -1,10 +1,7 @@
-import os
+from roboflow import Roboflow
 
 from src.hard_hat_detection.entity.config_entity import DataIngestionConfig
 from src.hard_hat_detection.logger.logger_config import logger
-from roboflow import Roboflow
-
-from src.hard_hat_detection.utils.common import get_env_var
 
 
 class DataIngestion:

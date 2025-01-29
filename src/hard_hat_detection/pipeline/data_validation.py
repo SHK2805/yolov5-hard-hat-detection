@@ -1,5 +1,8 @@
+import sys
+
 from src.hard_hat_detection.components.data_validation import DataValidation
 from src.hard_hat_detection.config.configuration import ConfigurationManager
+from src.hard_hat_detection.exception.exception import CustomException
 from src.hard_hat_detection.logger.logger_config import logger
 
 STAGE_NAME: str = "Data Validation Pipeline"
@@ -30,4 +33,4 @@ class DataValidationTrainingPipeline:
             logger.info(f"{tag}::All files validated successfully")
         except Exception as e:
             logger.error(f"{tag}::Error running the data validation pipeline: {e}")
-            raise e
+            raise CustomException(e, sys)

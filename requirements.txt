@@ -9,3 +9,22 @@ python-box
 types-PyYAML
 opencv-python
 roboflow
+# local package installation
+-e .
+yaml
+torch
+pillow
+torchvision
+matplotlib
+ultralytics
+pandas
+seaborn
+scipy
+requests
+tqdm
+psutil
+thop
+ultralytics-thop
+tensorflow
+setuptools
+boto3

@@ -9,6 +9,13 @@
 
 ### Steps
 
+#### Conda
+* Create a conda environment using the following command
+```bash
+conda create -n hardhatdetection python=3.7 -y
+conda activate hardhatdetection
+```
+
 #### Install dependencies
 * Install the dependencies using the following command
 ```bash
