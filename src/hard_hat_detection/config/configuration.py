@@ -3,7 +3,7 @@ from pathlib import Path
 
 from src.hard_hat_detection.constants.constants import CONFIG_FILE_PATH, PARAMS_FILE_PATH
 from src.hard_hat_detection.entity.config_entity import DataIngestionConfig, DataValidationConfig, \
-    DataTransformationConfig, ModelTrainerConfig
+    DataTransformationConfig, ModelTrainerConfig, ModelEvaluationConfig
 from src.hard_hat_detection.logger.logger_config import logger
 from src.hard_hat_detection.utils.common import read_yaml, create_directories
 
@@ -132,6 +132,29 @@ class ConfigurationManager:
         )
         logger.info(f"{tag}Model training configuration created")
         return model_trainer_config
+
+    def get_model_evaluation_config(self) -> ModelEvaluationConfig:
+        tag: str = f"{self.class_name}::get_model_evaluation_config::"
+        config = self.config.model_evaluation
+        logger.info(f"{tag}Model evaluation configuration obtained from the config file")
+
+        # create the data directory
+        data_dir = config.data_root_dir
+        logger.info(f"{tag}Data directory: {data_dir} obtained from the config file")
+        # create_directories([data_dir])
+        # logger.info(f"{tag}Data directory created: {data_dir}")
+
+        model_evaluation_config: ModelEvaluationConfig = ModelEvaluationConfig(
+            data_root_dir=config.data_root_dir,
+            data_dir=config.data_dir,
+            input_yaml_path=config.input_yaml_path,
+            weights_path=config.weights_path,
+            model_root_path=config.model_root_path,
+            used_model_name=config.used_model_name,
+            batch_size=config.batch_size
+        )
+
+        return model_evaluation_config
 
 
 

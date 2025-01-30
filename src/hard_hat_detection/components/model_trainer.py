@@ -14,7 +14,7 @@ class ModelTrainer:
     def __init__(self, config: ModelTrainerConfig):
         self.class_name = self.__class__.__name__
         self.config = config
-        self.project_root_path = Path(__file__).parent.parent.parent.parent # Path("./")
+        self.project_root_path = Path(__file__).parent.parent.parent.parent
 
     def generate_dataset_yaml(self):
         tag: str = f"{self.class_name}::generate_dataset_yaml::"
@@ -35,7 +35,7 @@ class ModelTrainer:
             logger.info(f"{tag}Generated the dataset yaml: {self.config.output_yaml_path}")
         except Exception as e:
             logger.error(f"{tag}::Error generating the dataset yaml file: {e}")
-            raise CustomException(e, sys)
+            raise e
 
     def check_yolo_v5(self):
         tag: str = f"{self.class_name}::check_yolo_v5::"
@@ -53,30 +53,7 @@ class ModelTrainer:
                 return False
         except Exception as e:
             logger.error(f"{tag}::Error checking the yolov5 repository: {e}")
-            raise CustomException(e, sys)
-
-    def train(self):
-        tag: str = f"{self.class_name}::train::"
-        try:
-            logger.info(f"{tag}::Training the model")
-            self.generate_dataset_yaml()
-            data_yaml_path = self.config.output_yaml_path
-            if not os.path.exists(data_yaml_path):
-                raise FileNotFoundError(f"File {data_yaml_path} does not exist")
-
-            if not self.check_yolo_v5():
-                raise FileNotFoundError(f"YOLO repository does not exist")
-
-            train_script_path = self.get_train_script_path()
-            command = self.construct_command(train_script_path, data_yaml_path)
-            logger.info(f"{tag}::Command to train the model: {command}")
-
-            self.run_training(command)
-            self.copy_weights()
-            logger.info(f"{tag}::Model training completed")
-        except Exception as e:
-            logger.error(f"{tag}::Error training the model: {e}")
-            raise CustomException(e, sys)
+            raise e
 
     def get_train_script_path(self):
         tag: str = f"{self.class_name}::get_train_script_path::"
@@ -106,7 +83,7 @@ class ModelTrainer:
             subprocess.run(command, shell=True)
         except Exception as e:
             logger.error(f"{tag}::Error running the training command: {e}")
-            raise CustomException(e, sys)
+            raise e
 
     def copy_weights(self):
         tag: str = f"{self.class_name}::copy_weights::"
@@ -118,3 +95,28 @@ class ModelTrainer:
         else:
             logger.error(f"{tag}::Weights file does not exist at {weights_source_path}")
             raise FileNotFoundError(f"File {weights_source_path} does not exist")
+
+    def train(self):
+        tag: str = f"{self.class_name}::train::"
+        try:
+            logger.info(f"{tag}::Training the model")
+            self.generate_dataset_yaml()
+            data_yaml_path = self.config.output_yaml_path
+            if not os.path.exists(data_yaml_path):
+                logger.error(f"File {data_yaml_path} does not exist")
+                raise FileNotFoundError(f"File {data_yaml_path} does not exist")
+
+            if not self.check_yolo_v5():
+                logger.error(f"YOLO repository does not exist")
+                raise FileNotFoundError(f"YOLO repository does not exist")
+
+            train_script_path = self.get_train_script_path()
+            command = self.construct_command(train_script_path, data_yaml_path)
+            logger.info(f"{tag}::Command to train the model: {command}")
+
+            self.run_training(command)
+            self.copy_weights()
+            logger.info(f"{tag}::Model training completed")
+        except Exception as e:
+            logger.error(f"{tag}::Error training the model: {e}")
+            raise CustomException(e, sys)

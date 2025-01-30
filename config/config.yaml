@@ -58,3 +58,16 @@ model_trainer:
     weight_name: 'yolov5s.pt'
     no_epochs: 1
     batch_size: 16
+
+model_evaluation:
+    # paths
+    data_root_dir: 'artifacts/model_evaluation'
+    # inputs
+    data_dir: 'artifacts/data_transformation'
+    input_yaml_path: 'artifacts/model_trainer/dataset.yaml'
+    # weights
+    weights_path: 'artifacts/model_trainer/results/weights/best.pt'
+    # model
+    model_root_path: 'yolov5'
+    used_model_name: 'yolov5'
+    batch_size: 16

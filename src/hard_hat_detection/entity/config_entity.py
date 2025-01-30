@@ -63,3 +63,14 @@ class ModelTrainerConfig:
     weight_name: str
     no_epochs: int
     batch_size: int
+
+@dataclass
+class ModelEvaluationConfig:
+    # these are the inputs to the model evaluation pipeline
+    data_root_dir: str
+    data_dir: str
+    input_yaml_path: str
+    weights_path: str
+    model_root_path: str
+    used_model_name: str
+    batch_size: int
