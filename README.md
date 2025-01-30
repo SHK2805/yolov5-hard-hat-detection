@@ -54,6 +54,7 @@ cd ..
 * The data is saved to the folder artifacts\data_ingestion
 * The data is transformed and copied to the artifacts\data_transformation folder
 * From the below structure the data is saved to the artifacts folder
+```
 data_ingestion
 │
 ├── test
@@ -87,8 +88,10 @@ data_ingestion
 │       └── ...
 │
 └── data.yaml
+```
 
 * Data is transformed to the below structure
+```
 data_transformation
 │
 ├── images
@@ -117,8 +120,44 @@ data_transformation
     └── valid
         ├── image1.txt
         ├── image2.txt
-        └── ...
+        └── ...     
+```
 
+### Storage
+* The data is stored in the **artifacts** folder
+* The artifacts folder is created in the root directory
+* The artifacts folder contains the following folders:
+  * **data_ingestion**
+    * The data is saved to this folder after downloading from the source
+  * **data_transformation**
+    * The data is saved to this folder after transforming the data from the data_ingestion folder 
+  * **data_validation**
+    * The status of the data validation is saved to this folder
+  * **model_trainer**
+    * The model data is saved to this folder in a subfolder called results after training the model
+    * The dataset.yaml file is created in this folder which contains the model data
+    * The pre-trained model weights are saved to this folder
+  * **model_evaluation**
+    * The metrics of the model evaluation are saved to this folder
+  * Folder structure
+  ```
+    root
+    └── artifacts
+        ├── data_ingestion
+        │   └── [Downloaded data files]
+        ├── data_transformation
+        │   └── [Transformed data files]
+        ├── data_validation
+        │   └── [Validation status files]
+        ├── model_trainer
+        │   ├── results
+        │   │   └── [Trained model data files]
+        │   ├── dataset.yaml
+        │   └── [Pre-trained model weights]
+        └── model_evaluation
+            ├── results
+                └── [Model evaluation metrics]
+    ```
 
 #### Flask
 * Before running the Flask API make sure the **Flask server is running**, to run the flask server flollow the below steps
@@ -175,17 +214,25 @@ python app.py
 * So make sure your dataset is sufficiently large and diverse.
 * We are using the pretrained weights in this project
 
+### YOLOv5 files used
+* The following files are used from the yolov5 repo
+  * train.py: This file is used to train the model
+  * val.py: This file is used to test the model 
+  * detect.py: This file is used to detect the model
+
 ### ML Pipeline
 * The ML pipeline is a sequence of steps that are executed in order to build, train, evaluate, and deploy a machine learning model.
-* Below are the steps in the ML pipeline:
-1. Data Collection
-2. Data Ingestion
-3. Data Transformation
-4. Model Training
-5. Model Evaluation
-6. Model Deployment
-7. Model Monitoring
-8. Model Retraining
+* Below are the steps in the ML pipeline (all the steps are **Not** needed in this project):
+  1. Data Collection
+  2. Data Ingestion
+  3. Data Transformation
+  4. Model Training
+  5. Model Evaluation
+  6. Model Deployment / Pusher
+  7. Model Monitoring
+  8. Model Retraining
+  9. Model Export
+
 
 ### Workflow
 * We update the below files in that order to achieve the ML pipeline:

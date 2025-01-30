@@ -90,10 +90,10 @@ class RunPipeline:
 
 
     def run(self) -> None:
-        # self.run_data_ingestion_pipeline()
-        # self.run_data_validation_pipeline()
-        # self.run_data_transformation_pipeline()
-        # self.run_model_trainer_pipeline()
+        self.run_data_ingestion_pipeline()
+        self.run_data_validation_pipeline()
+        self.run_data_transformation_pipeline()
+        self.run_model_trainer_pipeline()
         self.run_model_evaluation_pipeline()
 
 if __name__ == "__main__":
