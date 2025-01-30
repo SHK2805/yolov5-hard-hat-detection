@@ -30,7 +30,7 @@ class ModelEvaluation:
                 return False
         except Exception as e:
             logger.error(f"{tag}::Error checking the yolov5 repository: {e}")
-            raise e
+            raise CustomException(e, sys)
 
     def get_val_script_path(self):
         tag: str = f"{self.class_name}::get_val_script_path::"
@@ -59,7 +59,7 @@ class ModelEvaluation:
             subprocess.run(command, shell=True)
         except Exception as e:
             logger.error(f"{tag}::Error running the evaluation command: {e}")
-            raise e
+            raise CustomException(e, sys)
 
     def evaluate(self):
         tag: str = f"{self.class_name}::evaluate::"

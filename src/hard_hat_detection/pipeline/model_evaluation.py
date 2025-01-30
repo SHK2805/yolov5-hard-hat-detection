@@ -25,4 +25,4 @@ class ModelEvaluationTrainingPipeline:
             logger.info(f"{tag}::Model evaluation pipeline completed")
         except Exception as e:
             logger.error(f"{tag}::Error running the model evaluation pipeline: {e}")
-            raise e
+            raise CustomException(e, sys)

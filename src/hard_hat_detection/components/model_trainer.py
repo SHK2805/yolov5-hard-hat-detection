@@ -35,7 +35,7 @@ class ModelTrainer:
             logger.info(f"{tag}Generated the dataset yaml: {self.config.output_yaml_path}")
         except Exception as e:
             logger.error(f"{tag}::Error generating the dataset yaml file: {e}")
-            raise e
+            raise CustomException(e, sys)
 
     def check_yolo_v5(self):
         tag: str = f"{self.class_name}::check_yolo_v5::"
@@ -53,7 +53,7 @@ class ModelTrainer:
                 return False
         except Exception as e:
             logger.error(f"{tag}::Error checking the yolov5 repository: {e}")
-            raise e
+            raise CustomException(e, sys)
 
     def get_train_script_path(self):
         tag: str = f"{self.class_name}::get_train_script_path::"
@@ -83,7 +83,7 @@ class ModelTrainer:
             subprocess.run(command, shell=True)
         except Exception as e:
             logger.error(f"{tag}::Error running the training command: {e}")
-            raise e
+            raise CustomException(e, sys)
 
     def copy_weights(self):
         tag: str = f"{self.class_name}::copy_weights::"

@@ -86,7 +86,7 @@ class RunPipeline:
                 f"[COMPLETE]>>>>>>>>>>>>>>>>>>>> {self.model_evaluation_pipeline.stage_name} <<<<<<<<<<<<<<<<<<<<\n\n\n")
         except Exception as e:
             logger.error(f"{tag}::Error running the model evaluation pipeline: {e}")
-            raise e
+            raise CustomException(e, sys)
 
 
     def run(self) -> None:
@@ -97,6 +97,10 @@ class RunPipeline:
         self.run_model_evaluation_pipeline()
 
 if __name__ == "__main__":
-    # Run the pipelines
-    run_pipeline = RunPipeline()
-    run_pipeline.run()
+    try:
+        # Run the pipelines
+        run_pipeline = RunPipeline()
+        run_pipeline.run()
+    except Exception as ex:
+        logger.error(f"Error running the pipeline: {ex}")
+        raise CustomException(ex, sys)
