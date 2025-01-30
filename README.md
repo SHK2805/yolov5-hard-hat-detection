@@ -158,6 +158,11 @@ data_transformation
             ├── results
                 └── [Model evaluation metrics]
     ```
+  
+#### Prediction
+* The prediction pipeline is written in the prediction.py file
+* The class can predict using an image or a webcam
+* If we are using an image then we need to give the path to the image the default is **detections** folder
 
 #### Flask
 * Before running the Flask API make sure the **Flask server is running**, to run the flask server flollow the below steps

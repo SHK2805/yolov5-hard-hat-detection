@@ -84,7 +84,9 @@ def create_project_structure(project_name: str) -> bool:
             "templates/error.html",
             "app.py",
             # clean
-            "clean.py"
+            "clean.py",
+            # prediction files
+            "detections"
         ]
 
         for filepath in list_of_files:
