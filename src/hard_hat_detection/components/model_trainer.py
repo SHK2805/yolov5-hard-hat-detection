@@ -102,7 +102,7 @@ class ModelTrainer:
         try:
             logger.info(f"{tag}::Running the training command")
             # Uncomment the line below to execute the command
-            # subprocess.run(command, shell=True)
+            subprocess.run(command, shell=True)
         except Exception as e:
             logger.error(f"{tag}::Error running the training command: {e}")
             raise CustomException(e, sys)
