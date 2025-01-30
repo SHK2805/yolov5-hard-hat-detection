@@ -95,6 +95,7 @@ class ModelTrainer:
                            f"--name results  "
                            f"--project {results_path} "
                            f"--cache")
+        # TODO: Write the yolo console logs to a file in the logs directory or model_trainer directory
         return f'python {train_script_path} {additional_args}'
 
     def run_training(self, command):

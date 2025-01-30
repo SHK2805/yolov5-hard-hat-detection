@@ -6,3 +6,5 @@ services:
       - "8080:8080"
     volumes:
       - .:/app
+      - /dev/shm:/dev/shm  # Map host's shared memory directory to container's shared memory directory, this will avoaid the error of "OSError: [Errno 28] No space left on device"
+    # shm_size: '256m'  # Adjust the size as needed to avoid the error of "OSError: [Errno 28] No space left on device"

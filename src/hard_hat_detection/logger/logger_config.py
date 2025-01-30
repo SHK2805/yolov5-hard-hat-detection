@@ -15,6 +15,7 @@ log_filename = datetime.now().strftime(os.path.join(logs_directory, "ml_project_
 # Set up logger
 logger = logging.getLogger("CustomLogger")
 logger.setLevel(logging.DEBUG)
+logger.propagate = False # avoid printing to console multiple times and yolo overwriting the logger configuration
 
 # Create file handler to log to a file
 file_handler = logging.FileHandler(log_filename)
