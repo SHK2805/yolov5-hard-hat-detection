@@ -80,7 +80,7 @@ def create_project_structure(project_name: str) -> bool:
             "main.py",
             "setup.py",
             # app
-            "templates/index.html",
+            "templates/upload.html",
             "templates/error.html",
             "app.py",
             # clean

@@ -53,6 +53,7 @@ class PredictionPipeline:
             '--exist-ok'
         ]
         subprocess.run(command, check=True)
+        return self.output_folder
 
     def detect_image(self, image_path=None):
         if image_path:
@@ -60,7 +61,7 @@ class PredictionPipeline:
 
         if not self.source:
             raise ValueError('Image path not provided')
-        self.run_detection()
+        return self.run_detection()
 
     def detect_video(self, video_path=None):
         if video_path:
