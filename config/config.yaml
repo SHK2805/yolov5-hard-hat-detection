@@ -71,3 +71,11 @@ model_evaluation:
     model_root_path: 'yolov5'
     used_model_name: 'yolov5'
     batch_size: 16
+
+model_pusher:
+    # s3
+    s3_bucket_name: 'shks3yolov5cvlive'
+    region_name: 'us-east-1'
+    # model
+    weights_path: 'artifacts/model_trainer/results/weights/best.pt'
+    dataset_yaml_path: 'artifacts/model_trainer/dataset.yaml'

@@ -25,4 +25,5 @@ ultralytics-thop
 tensorflow
 setuptools
 boto3
--e .
+botocore
+# -e .

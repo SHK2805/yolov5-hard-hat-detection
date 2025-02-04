@@ -47,6 +47,7 @@ def create_project_structure(project_name: str) -> bool:
             f"src/{project_name}/components/data_transformation.py",
             f"src/{project_name}/components/model_trainer.py",
             f"src/{project_name}/components/model_evaluation.py",
+            f"src/{project_name}/components/model_pusher.py",
             # logger
             f"src/{project_name}/logger/__init__.py",
             f"src/{project_name}/logger/logger_config.py",
@@ -54,6 +55,8 @@ def create_project_structure(project_name: str) -> bool:
             f"src/{project_name}/utils/__init__.py",
             f"src/{project_name}/utils/common.py",
             f"src/{project_name}/utils/delete_directories.py",
+            f"src/{project_name}/utils/dataset_yaml_generator.py",
+            f"src/{project_name}/utils/s3_operations.py",
             # config
             f"src/{project_name}/config/__init__.py",
             f"src/{project_name}/config/configuration.py",
@@ -64,6 +67,7 @@ def create_project_structure(project_name: str) -> bool:
             f"src/{project_name}/pipeline/data_transformation.py",
             f"src/{project_name}/pipeline/model_trainer.py",
             f"src/{project_name}/pipeline/model_evaluation.py",
+            f"src/{project_name}/pipeline/model_pusher.py",
             f"src/{project_name}/pipeline/prediction.py",
             # entity
             f"src/{project_name}/entity/__init__.py",

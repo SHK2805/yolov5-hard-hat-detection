@@ -3,7 +3,7 @@ from pathlib import Path
 
 from src.hard_hat_detection.constants.constants import CONFIG_FILE_PATH, PARAMS_FILE_PATH
 from src.hard_hat_detection.entity.config_entity import DataIngestionConfig, DataValidationConfig, \
-    DataTransformationConfig, ModelTrainerConfig, ModelEvaluationConfig
+    DataTransformationConfig, ModelTrainerConfig, ModelEvaluationConfig, ModelPusherConfig
 from src.hard_hat_detection.logger.logger_config import logger
 from src.hard_hat_detection.utils.common import read_yaml, create_directories
 
@@ -155,6 +155,21 @@ class ConfigurationManager:
         )
 
         return model_evaluation_config
+
+    def get_model_pusher_config(self) -> ModelPusherConfig:
+        tag: str = f"{self.class_name}::get_model_pusher_config::"
+        config = self.config.model_pusher
+        logger.info(f"{tag}Model pusher configuration obtained from the config file")
+
+        model_pusher_config: ModelPusherConfig = ModelPusherConfig(
+            s3_bucket_name = config.s3_bucket_name,
+            region_name = config.region_name,
+            # model
+            weights_path = config.weights_path,
+            dataset_yaml_path = config.dataset_yaml_path
+        )
+
+        return model_pusher_config
 
 
 

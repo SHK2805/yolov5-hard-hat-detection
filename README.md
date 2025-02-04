@@ -54,7 +54,7 @@ cd ..
 * The data is saved to the folder artifacts\data_ingestion
 * The data is transformed and copied to the artifacts\data_transformation folder
 * From the below structure the data is saved to the artifacts folder
-```
+```plaintext
 data_ingestion
 │
 ├── test
@@ -91,7 +91,7 @@ data_ingestion
 ```
 
 * Data is transformed to the below structure
-```
+```plaintext
 data_transformation
 │
 ├── images
@@ -140,7 +140,7 @@ data_transformation
   * **model_evaluation**
     * The metrics of the model evaluation are saved to this folder
   * Folder structure
-  ```
+  ```plaintext
     root
     └── artifacts
         ├── data_ingestion

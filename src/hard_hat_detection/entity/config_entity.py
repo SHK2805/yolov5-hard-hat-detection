@@ -74,3 +74,13 @@ class ModelEvaluationConfig:
     model_root_path: str
     used_model_name: str
     batch_size: int
+
+@dataclass
+class ModelPusherConfig:
+    # these are the inputs to the model pusher pipeline
+    # s3
+    s3_bucket_name: str
+    region_name: str
+    # model
+    weights_path: str
+    dataset_yaml_path: str
