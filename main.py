@@ -5,6 +5,7 @@ from src.hard_hat_detection.logger.logger_config import logger
 from src.hard_hat_detection.pipeline.data_ingestion import DataIngestionTrainingPipeline
 from src.hard_hat_detection.pipeline.data_validation import DataValidationTrainingPipeline
 from src.hard_hat_detection.pipeline.data_transformation import DataTransformationTrainingPipeline
+from src.hard_hat_detection.pipeline.model_pusher import ModelPusherTrainingPipeline
 from src.hard_hat_detection.pipeline.model_trainer import ModelTrainerTrainingPipeline
 from src.hard_hat_detection.pipeline.model_evaluation import ModelEvaluationTrainingPipeline
 
@@ -18,6 +19,7 @@ class RunPipeline:
         self.data_transformation_pipeline: DataTransformationTrainingPipeline = DataTransformationTrainingPipeline()
         self.model_trainer_pipeline: ModelTrainerTrainingPipeline = ModelTrainerTrainingPipeline()
         self.model_evaluation_pipeline: ModelEvaluationTrainingPipeline = ModelEvaluationTrainingPipeline()
+        self.model_pusher_pipeline: ModelPusherTrainingPipeline = ModelPusherTrainingPipeline()
 
     def run_data_ingestion_pipeline(self) -> None:
         tag: str = f"{self.class_name}::run_data_ingestion_pipeline::"
@@ -89,12 +91,28 @@ class RunPipeline:
             raise CustomException(e, sys)
 
 
+    def run_model_pusher_pipeline(self) -> None:
+        tag: str = f"{self.class_name}::run_model_pusher_pipeline::"
+        try:
+            logger.info(
+                f"[STARTED]>>>>>>>>>>>>>>>>>>>> {self.model_pusher_pipeline.stage_name} <<<<<<<<<<<<<<<<<<<<")
+            logger.info(f"{tag}::Running the model pusher pipeline")
+            self.model_pusher_pipeline.model_pusher()
+            logger.info(f"{tag}::Model pusher pipeline completed")
+            logger.info(
+                f"[COMPLETE]>>>>>>>>>>>>>>>>>>>> {self.model_pusher_pipeline.stage_name} <<<<<<<<<<<<<<<<<<<<\n\n\n")
+        except Exception as e:
+            logger.error(f"{tag}::Error running the model pusher pipeline: {e}")
+            raise CustomException(e, sys)
+
+
     def run(self) -> None:
         self.run_data_ingestion_pipeline()
         self.run_data_validation_pipeline()
         self.run_data_transformation_pipeline()
         self.run_model_trainer_pipeline()
         self.run_model_evaluation_pipeline()
+        self.run_model_pusher_pipeline()
 
 if __name__ == "__main__":
     try:

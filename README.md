@@ -225,6 +225,15 @@ python app.py
   * val.py: This file is used to test the model 
   * detect.py: This file is used to detect the model
 
+### Cloud AWS
+* The project is deployed to the AWS cloud S3 bucket
+* Below files are used to create the stack in AWS
+  * cloudformation_template.yaml
+  * deploy.py
+    * The bucket name, region, and stack name are set in the deploy.py file and passed as parameters to the cloudformation_template.yaml file
+* The same bucket name and region are set in the config.yaml file
+* Model Pusher is used to push the model to the S3 bucket using the configuration
+
 ### ML Pipeline
 * The ML pipeline is a sequence of steps that are executed in order to build, train, evaluate, and deploy a machine learning model.
 * Below are the steps in the ML pipeline (all the steps are **Not** needed in this project):
@@ -233,10 +242,11 @@ python app.py
   3. Data Transformation
   4. Model Training
   5. Model Evaluation
-  6. Model Deployment / Pusher
-  7. Model Monitoring
-  8. Model Retraining
-  9. Model Export
+  6. Model Pusher
+  7. Model Deployment
+  8. Model Monitoring
+  9. Model Retraining
+  10. Model Export
 
 
 ### Workflow
@@ -246,6 +256,8 @@ python app.py
    2. data_validation
    3. data_transformation
    4. model_training
+   5. model_evaluation
+   6. model_pusher
 2. params.yaml
    1. The hyperparameters for the model
    2. model_training
@@ -260,6 +272,7 @@ python app.py
       3. data_transformation.py
       4. model_trainer.py
       5. model_evaluation.py
+      6. model_pusher.py
 6. Update the pipeline
     1. In src > pipeline
         1. data_ingestion.py
@@ -267,7 +280,8 @@ python app.py
         3. data_transformation.py 
         4. model_trainer.py
         5. model_evaluation.py
-        6. prediction.py
+        6. model_pusher.py
+        7. prediction.py
            1. The prediction pipeline is written only in this file the other above steps are not used in the prediction pipeline
 7. Update the main.py
     1. In main.py
