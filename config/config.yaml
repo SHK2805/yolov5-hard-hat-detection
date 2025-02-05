@@ -74,7 +74,7 @@ model_evaluation:
 
 model_pusher:
     # s3
-    s3_bucket_name: 'shks3yolov5cvlive'
+    s3_bucket_name: 'dev-stack-cv-hardhat-detection'
     region_name: 'us-east-1'
     # model
     weights_path: 'artifacts/model_trainer/results/weights/best.pt'

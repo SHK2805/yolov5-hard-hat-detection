@@ -9,7 +9,7 @@ from src.hard_hat_detection.logger.logger_config import logger
 
 
 class S3Operations:
-    def __init__(self, bucket_name = 'shks3yolov5cvlive', region_name='us-east-1'):
+    def __init__(self, bucket_name, region_name):
         self.bucket_name = bucket_name
         self.s3 = boto3.client('s3', region_name=region_name)
         self.s3_resource = boto3.resource('s3', region_name=region_name)
@@ -88,6 +88,6 @@ class S3Operations:
 
 # Example usage:
 if __name__ == "__main__":
-    s3_ops = S3Operations()
+    s3_ops = S3Operations('dev-stack-cv-bucket-0123456789', 'us-east-1')
     s3_ops.upload_file('best.pt')
     s3_ops.download_file('best.pt')
