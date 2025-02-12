@@ -12,7 +12,7 @@ class DataIngestionTrainingPipeline:
         self.stage_name = STAGE_NAME
 
     def data_ingestion(self) -> None:
-        tag: str = f"{self.class_name}::run_data_ingestion::"
+        tag: str = f"{self.class_name}::data_ingestion::"
         try:
             config = ConfigurationManager()
             logger.info(f"{tag}::Configuration Manager object created")
